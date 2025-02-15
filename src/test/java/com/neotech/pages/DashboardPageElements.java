@@ -20,6 +20,10 @@ public class DashboardPageElements {
 	@FindBy(linkText = "Add Employee")
 	public WebElement addEmployeeLink;
 	
+	
+	@FindBy(id="menu_pim_viewEmployeeList")
+	public WebElement employeeList;
+	
 	public DashboardPageElements()
 	{
 		PageFactory.initElements(BaseClass.driver, this);

@@ -50,4 +50,28 @@ public class LoginSteps extends CommonMethods {
 	}
 	
 	
+	@When("I enter an invalid password")
+	public void i_enter_an_invalid_password() {
+		sendText(loginPage.password, "Wrong Password");
+	}
+
+	@Then("I validate that Invalid Credentials is displayed")
+	public void i_validate_that_invalid_credentials_is_displayed() {
+		
+		String expected = "Invalid Credentials";
+		String actual = loginPage.invalidMsg.getText();
+		
+		if (actual.equals(expected))
+		{
+			System.out.println("Test Passed!");
+		}
+		else
+		{
+			System.out.println("Test Failed!");
+		}
+		
+	}
+	
+	
+	
 }
