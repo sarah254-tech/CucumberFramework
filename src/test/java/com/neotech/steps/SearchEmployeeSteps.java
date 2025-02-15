@@ -31,6 +31,10 @@ public class SearchEmployeeSteps extends CommonMethods {
 		wait(5);
 	}
 
-	
+	@When("the user enters valid employee name")
+	public void the_user_enters_valid_employee_name() {
+		sendText(employeeListPage.searchBox, "Odis Adalwin");
+	}
+
 	
 }

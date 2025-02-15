@@ -16,10 +16,13 @@ import io.cucumber.junit.CucumberOptions;
 		
 		//if this is set to true --> it only checks if the steps are glued (no functionality execution)
 		
-		dryRun=true, 
+		dryRun=false, 
 		
 		// by default is false. When true will makes the console (and logs) more readable.
-		monochrome=true
+		monochrome=true, 
+		
+		//we can define a tag or a combination of tags to run
+		tags= "@smoke and @regression"
 		
 		
 		)

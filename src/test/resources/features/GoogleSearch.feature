@@ -7,6 +7,7 @@ Feature: Searching in Google
     Then I can see the results of my search
     And I can see the number of results returned
 
+	@smoke
   Scenario: Search by Voice
     Given I navigated to google.com
     When I say what I want to search for
