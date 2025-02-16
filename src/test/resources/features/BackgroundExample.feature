@@ -6,7 +6,7 @@ Feature: Background keyword example
     And Precondition2
 
   Scenario: Example1
-    When Test Step1
+    When Test Step1 firstName is "Irena" and lastName is "Muskaj"
     And Test Step2
     Then Validation Step1
     And Validation Step2

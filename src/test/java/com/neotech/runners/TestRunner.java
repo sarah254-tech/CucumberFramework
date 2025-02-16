@@ -22,8 +22,8 @@ import io.cucumber.junit.CucumberOptions;
 		monochrome=true, 
 		
 		//we can define a tag or a combination of tags to run
-		tags= "@background"
-		
+		tags= "@dataTable"
+				
 		
 		)
 
