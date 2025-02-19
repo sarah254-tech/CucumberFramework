@@ -20,7 +20,7 @@ public class AddEmployeePageElements {
 	@FindBy(id = "location")
 	public WebElement location;
 	
-	@FindBy(xpath = "//div[@class='custom-control custom-switch']")
+	@FindBy(id = "hasLoginDetails")
 	public WebElement loginDetailsToggle;
 	
 	@FindBy(id = "username")
