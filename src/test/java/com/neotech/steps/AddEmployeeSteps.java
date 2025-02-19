@@ -1,9 +1,13 @@
 package com.neotech.steps;
 
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
 
 import com.neotech.utils.CommonMethods;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -38,6 +42,7 @@ public class AddEmployeeSteps extends CommonMethods {
 
 	@When("user clicks on save button")
 	public void user_clicks_on_save_button() {
+		wait(1);
 		click(addEmployeePage.saveButton);
 	}
 
@@ -75,8 +80,77 @@ public class AddEmployeeSteps extends CommonMethods {
 		sendText(addEmployeePage.password, "Juventus@123");
 		sendText(addEmployeePage.confirmPassword, "Juventus@123");
 	}
-	
+
 	// Homework for Hard working students
 	// Do the step above with parameterized username and password
+
+	@When("user enters employee {string}, {string} and {string}")
+	public void user_enters_employee_and(String first, String middle, String last) {
+		sendText(addEmployeePage.firstName, first);
+		sendText(addEmployeePage.middleName, middle);
+		sendText(addEmployeePage.lastName, last);
+	}
+
+	@When("user selects a location {string}")
+	public void user_selects_a_location(String location) {
+		selectDropdown(addEmployeePage.location, location);
+	}
+
+	@Then("validate that {string} and {string} is added successfully")
+	public void validate_that_and_is_added_successfully(String firstName, String lastName) {
+		waitForVisibility(personalDetailsPage.fullName);
+
+		String expectedName = firstName + " " + lastName;
+		String actualName = personalDetailsPage.fullName.getText();
+
+		// Please make sure you import Assert class under org.junit package
+		Assert.assertEquals("The employee name does NOT match!", expectedName, actualName);
+	}
+
+	// ----------------@UsingDataTable----------------
+
+	@When("user enters employee details and clicks on save and validates it is added")
+	public void user_enters_employee_details(DataTable table) {
+		// System.out.println(table);
+
+		// asLists() method returns a List for every row (including the header)
+		// System.out.println(table.asLists());
+
+		// asMaps() method returns a List of Maps for every data row
+		// (NOT including the header)
+		// System.out.println(table.asMaps());
+
+		List<Map<String, String>> employeeList = table.asMaps();
+
+		for (Map<String, String> employee : employeeList) {
+			System.out.println(employee);
+
+			String fName = employee.get("FirstName");
+			String mName = employee.get("MiddleName");
+			String lName = employee.get("LastName");
+
+			sendText(addEmployeePage.firstName, fName);
+			sendText(addEmployeePage.middleName, mName);
+			sendText(addEmployeePage.lastName, lName);
+
+			selectDropdown(addEmployeePage.location, "New York Sales Office");
+			wait(1);
+
+			click(addEmployeePage.saveButton);
+
+			waitForVisibility(personalDetailsPage.fullName);
+
+			String expectedName = fName + " " + lName;
+			String actualName = personalDetailsPage.fullName.getText();
+
+			// Please make sure you import Assert class under org.junit package
+			Assert.assertEquals("The employee name does NOT match!", expectedName, actualName);
+
+			// Before the next iteration
+			// We need to go to Add Employee page again
+			wait(1);
+			click(dashboardPage.addEmployeeLink);
+		}
+	}
 
 }
