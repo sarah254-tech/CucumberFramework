@@ -1,5 +1,8 @@
 package com.neotech.steps;
 
+
+import org.junit.Assert;
+
 import com.neotech.utils.CommonMethods;
 import com.neotech.utils.ConfigsReader;
 
@@ -21,7 +24,7 @@ public class LoginSteps extends CommonMethods {
 
 	@When("I enter a valid password")
 	public void i_enter_a_valid_password() {
-	  sendText(loginPage.password, ConfigsReader.getProperty("password"));
+		sendText(loginPage.password, ConfigsReader.getProperty("password"));
 	}
 
 	@When("I click on the login button")
@@ -33,13 +36,10 @@ public class LoginSteps extends CommonMethods {
 	public void i_validate_that_i_am_logged_in() {
 		String expected = "Jacqueline White";
 		String actual = dashboardPage.accountName.getText();
-		
-		if (actual.equals(expected))
-		{
+
+		if (actual.equals(expected)) {
 			System.out.println("Test Passed!!!");
-		}
-		else
-		{
+		} else {
 			System.out.println("Test Failed!!!");
 		}
 	}
@@ -48,8 +48,7 @@ public class LoginSteps extends CommonMethods {
 	public void i_quit_the_browser() {
 		tearDown();
 	}
-	
-	
+
 	@When("I enter an invalid password")
 	public void i_enter_an_invalid_password() {
 		sendText(loginPage.password, "Wrong Password");
@@ -57,21 +56,29 @@ public class LoginSteps extends CommonMethods {
 
 	@Then("I validate that Invalid Credentials is displayed")
 	public void i_validate_that_invalid_credentials_is_displayed() {
-		
+
 		String expected = "Invalid Credentials";
 		String actual = loginPage.invalidMsg.getText();
-		
-		if (actual.equals(expected))
-		{
+
+		if (actual.equals(expected)) {
 			System.out.println("Test Passed!");
-		}
-		else
-		{
+		} else {
 			System.out.println("Test Failed!");
 		}
-		
+
 	}
-	
-	
-	
+
+	@When("I enter valid {string} and {string}")
+	public void i_enter_valid_and(String username, String password) {
+		sendText(loginPage.username, username);
+		sendText(loginPage.password, password);
+	}
+
+	@Then("verify that {string} is displayed")
+	public void verify_that_is_displayed(String employeeName) {
+		String actualName = dashboardPage.accountName.getText();
+		
+		Assert.assertEquals("The account name does not match",employeeName, actualName);
+	}
+
 }
