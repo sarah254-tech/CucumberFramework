@@ -6,6 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.neotech.testbase.BaseClass;
 
+import net.bytebuddy.asm.MemberSubstitution.FieldValue;
+
 public class DashboardPageElements {
 	
 	@FindBy(id="ohrm-small-logo")
@@ -23,6 +25,12 @@ public class DashboardPageElements {
 	
 	@FindBy(id="menu_pim_viewEmployeeList")
 	public WebElement employeeList;
+	
+	@FindBy(id = "account-job")
+	public WebElement accountMenu;
+	
+	@FindBy(id = "logoutLink")
+	public WebElement logout;
 	
 	public DashboardPageElements()
 	{

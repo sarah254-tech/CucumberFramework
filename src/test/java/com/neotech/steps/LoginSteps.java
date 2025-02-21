@@ -1,11 +1,15 @@
 package com.neotech.steps;
 
 
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
 
 import com.neotech.utils.CommonMethods;
 import com.neotech.utils.ConfigsReader;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -80,5 +84,43 @@ public class LoginSteps extends CommonMethods {
 		
 		Assert.assertEquals("The account name does not match",employeeName, actualName);
 	}
+	
+	@When("user enters username and passowrd and clicks on the login button")
+	public void user_enters_username_and_passowrd_and_clicks_on_the_login_button(DataTable employees) {
+	    
+		// TODO
+		// for every row in the employees dataTable --> user
+		// send login credentials
+		// click on the login button
+		// verify the employee name
+		// logout
+		
+		// convert the dataTable into Map objects 
+		List<Map<String, String>> employeeList = employees.asMaps();
+		
+		// now iterate over the employeeList and do the login, verification, and logout
+		for (Map<String, String> employee : employeeList)
+		{
+			System.out.println("Logging in with: " + employee.get("username") + 
+						" and password: " + employee.get("password"));
+			
+			//login
+			sendText(loginPage.username, employee.get("username"));
+			sendText(loginPage.password, employee.get("password"));
+			
+			// login button
+			click(loginPage.loginBtn);
+			
+			// verify 
+			String actualName = dashboardPage.accountName.getText();
+			Assert.assertEquals("The account name does not match!", employee.get("employeeName"), actualName);
+			
+			// logout
+			click(dashboardPage.accountMenu);
+			click(dashboardPage.logout);
+		}
+		
+	}
+
 
 }

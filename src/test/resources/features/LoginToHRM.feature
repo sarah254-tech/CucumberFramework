@@ -29,3 +29,10 @@ Feature: Login Functionality
       | username   | password   | employeeName |
       | arminarmin | Armin@2025 | Armin Arlert |
       | ereneren   | Eren@2025  | Eren Yeager  |
+      
+	@HW3
+  Scenario: Login using DataTable
+    When user enters username and passowrd and clicks on the login button
+      | username   | password   | employeeName |
+      | arminarmin | Armin@2025 | Armin Arlert |
+      | ereneren   | Eren@2025  | Eren Yeager  |
