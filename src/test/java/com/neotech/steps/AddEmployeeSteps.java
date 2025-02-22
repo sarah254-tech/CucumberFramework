@@ -6,6 +6,7 @@ import java.util.Map;
 import org.junit.Assert;
 
 import com.neotech.utils.CommonMethods;
+import com.neotech.utils.ExcelUtility;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -152,5 +153,19 @@ public class AddEmployeeSteps extends CommonMethods {
 			click(dashboardPage.addEmployeeLink);
 		}
 	}
+	
+	
+	@When("user enters employee data from {string} Excel sheet and saves the employee")
+	public void user_enters_employee_data_from_excel_sheet_and_saves_the_employee(String sheetName) {
+
+		//read the data from the Excel file in the given sheet 
+		String path = System.getProperty("user.dir") + "/src/test/resources/testdata/Excel.xlsx";
+		List<Map<String, String>> excelData =ExcelUtility.excelIntoListOfMaps(path, sheetName);
+		
+		
+		
+		
+	}
+	
 
 }

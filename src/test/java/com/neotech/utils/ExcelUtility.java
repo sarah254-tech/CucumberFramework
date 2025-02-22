@@ -1,8 +1,11 @@
 package com.neotech.utils;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -71,7 +74,7 @@ public class ExcelUtility {
 		return sheet.getRow(rowIndex).getCell(colIndex).toString();
 	}
 	
-	public static Object[][] excelIntoArray(String filePath, String sheetName)
+	public static List<Map<String, String>> excelIntoListOfMaps(String filePath, String sheetName)
 	{
 		
 		// open the file: filePath
@@ -80,26 +83,27 @@ public class ExcelUtility {
 		// load the sheet: sheetName
 		loadSheet(sheetName);
 		
-		// get the number of rows
-		int rowNumber = rowCount();
-		
-		// get the number of columns 
-		int columnNumber = colCount(0);
+		//initialize the list to fill the data and then return it
+		List<Map<String, String>> list = new ArrayList<>();
 		
 		
-		
-		Object[][] data = new Object[rowNumber - 1][columnNumber];
-		
-		//nested loop to iterate over all cells and get the data from them
-		for (int row = 1; row < rowNumber; row++) //for each row except the header
+		for (int row = 1; row < rowCount(); row++)
 		{
-			for (int col = 0; col < columnNumber; col++) 
+			Map<String, String> rowMap = new LinkedHashMap<>();
+			
+			for (int col = 0; col < colCount(row); col++)
 			{
-				data[row - 1][col] = cellData(row, col);
+				String key = cellData(0, col);
+				String value = cellData(row, col);
+				
+				rowMap.put(key, value);
 			}
+			
+			//add the filled map to the list
+			list.add(rowMap);
 		}
-		
-		return data;
+
+		return list;
 	}
 
 }
