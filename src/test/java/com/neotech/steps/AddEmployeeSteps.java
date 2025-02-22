@@ -162,6 +162,54 @@ public class AddEmployeeSteps extends CommonMethods {
 		String path = System.getProperty("user.dir") + "/src/test/resources/testdata/Excel.xlsx";
 		List<Map<String, String>> excelData =ExcelUtility.excelIntoListOfMaps(path, sheetName);
 		
+		//we have to plan so that we get each map, fill out the data, save the employee
+			//AND THEN GO AGAIN TO THE ADD EMPLOYEE FORM
+		
+		
+		for (Map<String, String> employee : excelData)
+		{
+			//get the employee info from the map
+			String fname = employee.get("FirstName");
+			String lname = employee.get("LastName");
+			String location = employee.get("Location");
+			String user = employee.get("Username");
+			String pass = employee.get("Password");
+			
+			//send the employee data
+			sendText(addEmployeePage.firstName, fname);
+			//could've done this in one line: 
+			//sendText(addEmployeePage.firstName, employee.get("FirstName"));
+			sendText(addEmployeePage.lastName, lname);
+			selectDropdown(addEmployeePage.location, location);
+			
+			jsClick(addEmployeePage.loginDetailsToggle);
+			
+			sendText(addEmployeePage.username, user);
+			sendText(addEmployeePage.password, pass);
+			sendText(addEmployeePage.confirmPassword, pass);
+			
+			wait(2);
+			
+			click(addEmployeePage.saveButton);
+			
+			//wait for the personal employee details 
+			waitForVisibility(personalDetailsPage.personalDetailsForm);
+			
+			//assert the employee was added 
+			String expectedText = fname + " " + lname;
+			String actualText = personalDetailsPage.fullName.getText();
+			
+			Assert.assertEquals("Employee NOT added!", expectedText, actualText);
+			
+			//at this point we have added the employee and also asserted whether it was 
+			//saved or not. 
+			
+			
+			//we need to make sure that before we start adding the next employee (next loop)
+			//we got to the add employee page
+			click(dashboardPage.addEmployeeLink);
+			
+		}
 		
 		
 		
