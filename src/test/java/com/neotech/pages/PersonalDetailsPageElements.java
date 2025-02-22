@@ -16,6 +16,23 @@ public class PersonalDetailsPageElements {
 
 	@FindBy(id = "employeeId")
 	public WebElement employeeId;
+	
+	@FindBy(id = "pimPersonalDetailsForm")
+	public WebElement personalDetailsForm;
+	
+	@FindBy(id = "licenseNo")
+	public WebElement drivingLicense;
+	
+	@FindBy(id = "smoker")
+	public WebElement smokerCheckBox;
+	
+	@FindBy(id = "emp_gender")
+	public WebElement genderDD;  //tried selectDropdown with the Select tag
+	
+	@FindBy(xpath = "//div[@id='emp_gender_inputfileddiv']/div/input")
+	public WebElement genderInput; //used to click on the gender dropdown
+	
+	
 
 	public PersonalDetailsPageElements() {
 		PageFactory.initElements(BaseClass.driver, this);
