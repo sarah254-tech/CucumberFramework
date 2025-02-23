@@ -405,7 +405,7 @@ public class CommonMethods extends PageInitializer{
 	 * 
 	 * @param fileName
 	 */
-	public static String takeScreenshot(String fileName)
+	public static byte[] takeScreenshot(String fileName)
 	{
 		
 		String destination = Constants.SCREENSHOT_FILEPATH + fileName + getTimestamp() + ".png";
@@ -420,7 +420,9 @@ public class CommonMethods extends PageInitializer{
 			e.printStackTrace();
 		}
 		
-		return destination;
+		byte[] screenshotBytes = ts.getScreenshotAs(OutputType.BYTES);
+		
+		return screenshotBytes;
 	}
 	
 	/**

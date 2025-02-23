@@ -22,7 +22,16 @@ import io.cucumber.junit.CucumberOptions;
 		monochrome=true, 
 		
 		//we can define a tag or a combination of tags to run
-		tags= "@excelDataTable"
+		tags= "@smoke",
+		
+		plugin = {
+					// prints the tagged Gherkin scenario(s) steps to the console
+					"pretty",
+					// creates and saves a basic html report in the target folder 
+					"html:target/cucumber-default-report.html",
+					// stores all executed steps in a json file
+					"json:target/cucumber.json"
+				}
 				
 		
 		)
