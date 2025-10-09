@@ -1,5 +1,6 @@
 package com.neotech.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,9 +17,10 @@ public class ConfigsReader {
 	 */
 	public static void readProperties(String filePath)
 	{
+		
 		try 
 		{
-			FileInputStream fis = new FileInputStream(filePath);
+			FileInputStream fis = new FileInputStream(filePath);;
 			prop = new Properties();
 			prop.load(fis);
 		}

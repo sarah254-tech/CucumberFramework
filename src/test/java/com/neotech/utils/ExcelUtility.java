@@ -1,6 +1,7 @@
 package com.neotech.utils;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -26,8 +27,13 @@ public class ExcelUtility {
 		try 
 		{
 			FileInputStream fis = new FileInputStream(filePath);
+			System.out.println("File opened successfully!");
 			book = new XSSFWorkbook(fis);
 		} 
+		catch(FileNotFoundException e)
+		{
+			System.err.println("File not found: " + e.getMessage());
+		}
 		catch (IOException e) 
 		{
 				e.printStackTrace();
