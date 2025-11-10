@@ -1,1 +1,54 @@
 /target/
+# Eclipse and Java
+
+.classpath
+
+.project
+
+.settings/
+
+bin/
+
+target/
+
+*.class
+
+*.log
+
+# Maven
+
+pom.xml.tag
+
+pom.xml.releaseBackup
+
+release.properties
+
+# Eclipse and Java
+
+.classpath
+
+.project
+
+.settings/
+
+bin/
+
+target/
+
+*.class
+
+*.log
+
+# Maven
+
+.classpath
+.project
+.settings/
+bin/
+/target/
+*.class
+*.log
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties
